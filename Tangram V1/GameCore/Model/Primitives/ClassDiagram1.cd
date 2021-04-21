@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Tangram.GameCore.Model.Primitives.Primitive">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAAAAAAgAYAA=</HashCode>
+      <FileName>GameCore\Model\Primitives\Primitive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tangram.GameCore.Model.Primitives.Rectangle">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameCore\Model\Primitives\Primitive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tangram.GameCore.Model.Primitives.Elipse">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameCore\Model\Primitives\Primitive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tangram.GameCore.Model.Primitives.Line">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameCore\Model\Primitives\Primitive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tangram.GameCore.Model.Primitives.Polygon">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameCore\Model\Primitives\Primitive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tangram.GameCore.Model.Primitives.PrimitiveCreator">
+    <Position X="8.75" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEQAEAAAAAAgAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameCore\Model\Primitives\PrimitiveCreator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

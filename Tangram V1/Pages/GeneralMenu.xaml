@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tangram.Pages.GeneralMenu">
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="background.png" Aspect="AspectFill" />
+            <RelativeLayout>
+                <ImageButton    
+                                Source="Start.png" BorderColor="Transparent"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
+                                BackgroundColor="Transparent"
+                                Clicked="Start_Clicked"
+                               
+                                
+                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
+                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.18}"
+                                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
+                                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}"
+                             />
+                <ImageButton    
+                                Source="Exit.png" BorderColor="Transparent"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
+                                BackgroundColor="Transparent"
+                                Clicked="Exit_Clicked"
+                    
+                            
+                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
+                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.55}"
+                                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.33}"
+                                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}"
+                                
+                            />
+            </RelativeLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

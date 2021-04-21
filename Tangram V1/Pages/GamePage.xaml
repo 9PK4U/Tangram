@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="Tangram.Pages.GamePage">
+
+    <Grid>
+
+        <skia:SKCanvasView x:Name="canvasView" PaintSurface="OnCanvasViewPaintSurface" Touch="OnTouch" EnableTouchEvents="True"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="End"  HeightRequest="50" >
+            <ImageButton 
+                Scale="1"
+                Source="Restart.png"     
+                
+                BackgroundColor="Transparent"
+                Clicked="Start_Clicked"
+                VerticalOptions="Start"
+                />
+            <ImageButton  
+                Scale="1"
+                Source="Home.png"         
+                  
+                BackgroundColor="Transparent"
+                Clicked="Home_Clicked"
+                />
+
+        </StackLayout>
+    </Grid>
+
+
+</ContentPage>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tangram.Pages.LevelMenu">
+
+    <ContentPage.Resources>
+        <Style  x:Key="btnStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="120" />
+            <Setter Property="HeightRequest" Value="120" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="Background.png" Aspect="AspectFill" />
+
+            <ScrollView>
+                <FlexLayout x:Name="flexLayout"
+                        Wrap="Wrap"
+                        JustifyContent="SpaceAround" >
+
+                </FlexLayout>
+            </ScrollView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
