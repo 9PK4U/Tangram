@@ -14,27 +14,31 @@ using SkiaSharp.Views.Forms;
 using Tangram.GameCore.Model;
 using Tangram.GameCore.Model.Figures;
 using Tangram.GameCore.Model.Primitives;
+using Tangram.Data.DBData;
+using Tangram.Data.LevelData;
 
 namespace Tangram.GameCore
 {
 
     public class GameMap
     {
-        public string GameMapData { get; set; }
+        public LevelItem Level { get; set; }
         public Size SizeScreen { get; private set; }
         public Dictionary<int,Figure> Figures { get; set; }
         public SortedDictionary<int,int>  SuccsessionsID{ get; set; }
         public Figure СurrentFigure { get; set; }
 
 
-        public GameMap(string mapData, Size size)
+        public GameMap(LevelItem level, Size size)
         {
-            GameMapData = mapData;
+            Level = level;
             SizeScreen = size;
             Figures = new Dictionary<int, Figure>();
             SuccsessionsID = new SortedDictionary<int, int>();
 
-            var map = Parser.Parser.FromJson(GameMapData);
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var levelData = File.ReadAllText(Path.Combine(folderPath, level.Source));
+            var map = Parser.Parser.FromJson(levelData);
             var sizeMap = new Size(map.Width, map.Height);
             //sizeMap = new Size(709, 570);
 
@@ -127,6 +131,11 @@ namespace Tangram.GameCore
             }
             Debug.WriteLine("-------------------");
             return state;
+        }
+        public void UpdateLevelInfo()
+        {
+            Level.Passed = true;
+            LevelController.UpdateLevel(Level);
         }
     }
 }

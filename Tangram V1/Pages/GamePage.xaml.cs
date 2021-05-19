@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Tangram.Data.DBData;
 using Xamarin.Essentials;
 //using Skia
 
@@ -28,7 +29,7 @@ namespace Tangram.Pages
 
 
 
-        public GamePage(string gameMapData)
+        public GamePage(LevelItem level)
         {
 
             var wScreen = DeviceDisplay.MainDisplayInfo.Width;
@@ -45,15 +46,13 @@ namespace Tangram.Pages
 
 
             State = Status.Start;
-            GameMap = new Tangram.GameCore.GameMap(gameMapData, new Size(wScreen, hScreen));
+            GameMap = new Tangram.GameCore.GameMap(level, new Size(wScreen, hScreen));
 
             InitializeComponent();
         }
 
         void OnTouch(object sender, SKTouchEventArgs e)
         {
-            //Debug.WriteLine(e);
-
             if (State != Status.Game)
             {
                 if (State == Status.Start && e.ActionType == SKTouchAction.Pressed) State = Status.Init;
@@ -93,6 +92,7 @@ namespace Tangram.Pages
                 {
                     State = Status.End;
                     DisplayAlert("Победа", "Вы правильно собрали картинку", "OK");
+                    GameMap.UpdateLevelInfo();
                     Application.Current.MainPage.Navigation.PopModalAsync();
                 }
             }
@@ -176,7 +176,7 @@ namespace Tangram.Pages
         private void Start_Clicked(object sender, EventArgs e)
         {
             State = Status.Start;
-            GameMap = new GameCore.GameMap(GameMap.GameMapData, GameMap.SizeScreen);
+            GameMap = new GameCore.GameMap(GameMap.Level, GameMap.SizeScreen);
             canvasView.InvalidateSurface();
         }
     }

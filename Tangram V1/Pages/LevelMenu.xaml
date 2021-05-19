@@ -12,14 +12,17 @@
     <ContentPage.Content>
         <Grid>
             <Image Source="Background.png" Aspect="AspectFill" />
-
-            <ScrollView>
-                <FlexLayout x:Name="flexLayout"
+            <StackLayout>
+                <Button Text="Обновить уровни" Clicked="Button_Clicked_1" BackgroundColor="Aqua"></Button>
+                <Button Text="Удалить уровни" Clicked="Button_Clicked" BackgroundColor="Aqua"></Button>
+                <ScrollView>
+                    <FlexLayout x:Name="flexLayout"
                         Wrap="Wrap"
                         JustifyContent="SpaceAround" >
 
-                </FlexLayout>
-            </ScrollView>
+                    </FlexLayout>
+                </ScrollView>
+            </StackLayout>
 
         </Grid>
     </ContentPage.Content>
