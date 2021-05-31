@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tangram.Pages.TagMenu">
+
+    <ContentPage.Resources>
+        <Style  x:Key="btnStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="120" />
+            <Setter Property="HeightRequest" Value="120" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                
+                <ColumnDefinition Width="0.8*"/>
+               
+            </Grid.ColumnDefinitions>
+
+            <Image Source="Background.png" Aspect="AspectFill"  Grid.ColumnSpan ="1"  Grid.RowSpan ="3"/>
+
+            <Image Source="ChangeCategory.png" Aspect="AspectFill"  Grid.Column ="0"  HorizontalOptions="Center" Grid.Row ="0"/>
+            
+          
+            <ScrollView Padding="20,0,20,0" Grid.Row="1" Grid.Column="0">
+                <FlexLayout x:Name="flexLayout"
+                        Wrap="Wrap"
+                        JustifyContent="SpaceAround" >
+
+                    <ImageButton   
+                            FlexLayout.Basis="33%"
+                            x:Name="AnimalsButton"
+                            Source="Animals.png" BorderColor="Transparent"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"
+                            BackgroundColor="Transparent"
+                            Clicked="Button_Clicked"/>
+                    <ImageButton    
+                            FlexLayout.Basis="33%"
+                            x:Name="AnimeButton"
+                            Source="Anime.png" BorderColor="Transparent"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"
+                            BackgroundColor="Transparent"
+                            Clicked="Button_Clicked"/>
+
+                    <ImageButton   
+                            FlexLayout.Basis="33%"
+                            x:Name="TechnicButton"
+                            Source="Technic.png" BorderColor="Transparent"
+                            HorizontalOptions="Center"
+                            VerticalOptions="CenterAndExpand"
+                            BackgroundColor="Transparent"
+                            Clicked="Button_Clicked"/>
+
+                </FlexLayout>
+            </ScrollView>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="End"  HeightRequest="50" Grid.Row ="2"  >
+                <ImageButton  
+                Clicked="HomeButton_Clicked"
+                Scale="1"
+                Source="Home.png"         
+                BackgroundColor="Transparent"
+                
+                />
+
+            </StackLayout>
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -114,7 +114,11 @@ namespace Tangram.Pages
 
             foreach (var item in GameMap.SuccsessionsID)
             {
+                var figure = GameMap.Figures[item.Value];
+                canvas.RotateDegrees(figure.Angle, (float)figure.DrawPoint.X, (float)figure.DrawPoint.Y);
                 canvas.DrawBitmap(GameMap.Figures[item.Value].Bitmap, GameMap.Figures[item.Value].DrawPoint.ToSKPoint());
+                canvas.RotateDegrees(-GameMap.Figures[item.Value].Angle, (float)figure.DrawPoint.X, (float)figure.DrawPoint.Y);
+
             }
 
             if (State == Status.Init)
@@ -124,22 +128,23 @@ namespace Tangram.Pages
                 foreach (var item in GameMap.Figures)
                 {
                     c = random.Next(4);
+                    double dx = 1.5;
                     switch (c)
                     {
                         case 0:
-                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(-item.Value.Width, -item.Value.Height);
+                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(-item.Value.Width* dx, -item.Value.Height * dx);
                             c++;
                             break;
                         case 1:
-                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(item.Value.Width, -item.Value.Height);
+                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(item.Value.Width* dx, -item.Value.Height * dx);
                             c++;
                             break;
                         case 2:
-                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(item.Value.Width, item.Value.Height);
+                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(item.Value.Width * dx, item.Value.Height * dx);
                             c++;
                             break;
                         case 3:
-                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(-item.Value.Width, item.Value.Height);
+                            listNewPoint[item.Key] = item.Value.DrawPoint.Offset(-item.Value.Width * dx, item.Value.Height * dx);
                             c = 0;
 
                             break;
@@ -149,15 +154,17 @@ namespace Tangram.Pages
                 }
                 int count = 0;
                 State = Status.Animation;
-                Device.StartTimer(TimeSpan.FromMilliseconds(10), () =>
+                Device.StartTimer(TimeSpan.FromMilliseconds(20), () =>
                 {
                     count++;
                     foreach (var item in GameMap.Figures)
                     {
-                        item.Value.Move(item.Value.DrawPoint.Offset((listNewPoint[item.Key].X - item.Value.DrawPoint.X) / 30, (listNewPoint[item.Key].Y - item.Value.DrawPoint.Y) / 30));
+                        if((item.Value.DrawPoint.Y + item.Value.Bitmap.Height) < info.Height && item.Value.DrawPoint.Y > 0)
+                        if((item.Value.DrawPoint.X + item.Value.Bitmap.Width) < info.Width && item.Value.DrawPoint.X  > 0)
+                            item.Value.Move(item.Value.DrawPoint.Offset((listNewPoint[item.Key].X - (item.Value.DrawPoint.X)) / 40, (listNewPoint[item.Key].Y - item.Value.DrawPoint.Y) / 40));
                     }
                     canvasView.InvalidateSurface();
-                    if (count < 30) return true;
+                    if (count < 40) return true;
                     State = Status.Game;
                     return false;
                 });

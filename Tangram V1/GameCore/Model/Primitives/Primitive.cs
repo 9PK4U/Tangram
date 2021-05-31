@@ -137,10 +137,13 @@ namespace Tangram.GameCore.Model.Primitives
             {
                 SKPath path = new SKPath();
 
-                // Define the first contour
                 path.MoveTo((float)points[0].X - X, (float)points[0].Y - Y);
-                path.LineTo((float)points[1].X - X, (float)points[1].Y - Y);
-                path.LineTo((float)points[2].X - X, (float)points[2].Y - Y);
+
+                for (int i = 0; i < points.Count;i++)
+                {
+                    path.LineTo((float)points[i].X - X, (float)points[i].Y - Y);
+
+                }
 
 
                 

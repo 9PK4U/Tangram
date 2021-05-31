@@ -5,6 +5,7 @@
     <ContentPage.Content>
         <Grid>
             <Image Source="background.png" Aspect="AspectFill" />
+            <ActivityIndicator x:Name="Indicator" IsRunning="False" Color ="#80000000"/>
             <RelativeLayout>
                 <ImageButton    
                                 Source="Start.png" BorderColor="Transparent"
@@ -34,6 +35,7 @@
                                 
                             />
             </RelativeLayout>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

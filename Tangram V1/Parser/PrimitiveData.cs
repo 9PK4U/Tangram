@@ -16,7 +16,7 @@ namespace Parser
         public string BorderColor { get; set; }
         public string Type { get; set; }
         public Rect Bounds { get; set; }
-        public Dictionary<string, object> Parameters { get; set; }
+        public List<Point> Points { get; set; }
 
         public PrimitiveData()
         {

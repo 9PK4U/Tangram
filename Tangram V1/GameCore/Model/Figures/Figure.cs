@@ -18,6 +18,7 @@ namespace Tangram.GameCore.Model.Figures
         public int Height { get; private set; }
         public int ZIndex { get; private set; }
         public Point DrawPoint { get; private set; }
+        public Point SkewDrawPoint { get; private set; }
         public Point CursorPoint { get; private set; }
 
 
@@ -28,12 +29,13 @@ namespace Tangram.GameCore.Model.Figures
 
         public SKBitmap Bitmap { get; private set; }
 
-        public Figure(List<Primitive> primitives, Point point, int width, int height, int zIndex) 
+        public Figure(List<Primitive> primitives, Point point, int width, int height, int zIndex, int angle) 
         {
             DrawPoint = point;
             Width = width;
             Height = height;
             ZIndex = zIndex;
+            Angle = angle;
 
             InitBitmap(primitives);
         }
@@ -51,7 +53,7 @@ namespace Tangram.GameCore.Model.Figures
 
             //};
 
-            //using (SKCanvas canvas = new SKCanvas(Bitmap))
+            //using (SKCanvas canvas = new SKCanvas(sBitmap))
             //{
             //    canvas.DrawRect(0, 0, Width, Height, paint);
             //}
@@ -60,12 +62,18 @@ namespace Tangram.GameCore.Model.Figures
             {
                 foreach (var fgr in primitives)
                 {
+
                     canvas.DrawBitmap(fgr.Bitmap, new SKPoint(fgr.X,fgr.Y));
                 }
             }
+
+
+
+
         }
         public bool CheckCoordinates(Point point)
         {
+    
             if (point.X > DrawPoint.X && point.X < DrawPoint.X + Width)
                 if (point.Y > DrawPoint.Y && point.Y < DrawPoint.Y + Height)
                 {
@@ -82,7 +90,6 @@ namespace Tangram.GameCore.Model.Figures
         public void Move(Point point) 
         {
             DrawPoint = CursorPoint = point;
-            //CursorPoint = new Point(((int)(point.X - DrawPoint.X)), (point.Y - DrawPoint.Y));
         }
         public void TouchMove(Point point)
         {
@@ -99,7 +106,7 @@ namespace Tangram.GameCore.Model.Figures
                     primitives.Add(PrimitiveCreator.CreateFromData(prim, scale));
                 }
                 return new
-                    Figure(primitives, new Point(figureData.Drawpoint.X * scale, figureData.Drawpoint.Y * scale), (int)(figureData.Width * scale), (int)(figureData.Height * scale), figureData.ZIndex)
+                    Figure(primitives, new Point(figureData.Drawpoint.X * scale, figureData.Drawpoint.Y * scale), (int)(figureData.Width * scale), (int)(figureData.Height * scale), figureData.ZIndex, figureData.Angle)
                 { 
                     Id = figureData.Id,
                     MajorFigureId = figureData.MajorFigureId,

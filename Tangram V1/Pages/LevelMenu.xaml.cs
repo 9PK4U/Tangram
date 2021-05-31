@@ -12,17 +12,19 @@ namespace Tangram.Pages
     public partial class LevelMenu : ContentPage
     {
 
-
-        public LevelMenu()
+        public enum Tag { Animals, Anime, Technic, Tangram};
+        Tag tagLevels;
+        public LevelMenu(Tag tag)
         {
+            tagLevels = tag;
             InitializeComponent();
 
-            LoadBitmapCollection();
+            LoadBitmapCollection(tag);
 
         }
 
 
-        void  LoadBitmapCollection()
+        void  LoadBitmapCollection(Tag tag)
         {
 
 
@@ -31,6 +33,12 @@ namespace Tangram.Pages
 
 
             var levels = LevelController.LoadLevelCollection();
+            bool PredicateTag(Data.DBData.LevelItem item)
+            {
+                return item.Tag != tag.ToString();
+            }
+            levels.RemoveAll(PredicateTag);
+
             int count = 1;
             for (int i = 0; i < levels.Count; i++)
             {
@@ -47,7 +55,7 @@ namespace Tangram.Pages
                             Navigation.PushModalAsync(gamePage);
                             gamePage.Disappearing += (sender, e) =>
                             {
-                                LoadBitmapCollection();
+                                LoadBitmapCollection(tag);
                             };
                         }),
                         CommandParameter = count - 2
@@ -64,13 +72,17 @@ namespace Tangram.Pages
         private void Button_Clicked(object sender, EventArgs e)
         {
             LevelController.RemoveDB();
-            LoadBitmapCollection();
+            LoadBitmapCollection(tagLevels);
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             LevelController.Update();
-            LoadBitmapCollection();
+            LoadBitmapCollection(tagLevels);
+        }
+        private void HomeButton_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 

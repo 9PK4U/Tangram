@@ -11,10 +11,18 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
-            <Image Source="Background.png" Aspect="AspectFill" />
-            <StackLayout>
-                <Button Text="Обновить уровни" Clicked="Button_Clicked_1" BackgroundColor="Aqua"></Button>
-                <Button Text="Удалить уровни" Clicked="Button_Clicked" BackgroundColor="Aqua"></Button>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="0.8*"/>
+
+            </Grid.ColumnDefinitions>
+            <Image Source="Background.png" Aspect="Fill"  Grid.ColumnSpan ="1"  Grid.RowSpan ="2"/>
+            <StackLayout Padding="20"  Grid.Row="0" Grid.Column="0">
                 <ScrollView>
                     <FlexLayout x:Name="flexLayout"
                         Wrap="Wrap"
@@ -22,6 +30,16 @@
 
                     </FlexLayout>
                 </ScrollView>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="End"  HeightRequest="50" Grid.Row ="1"  >
+                <ImageButton  
+                Clicked="HomeButton_Clicked"
+                Scale="1"
+                Source="Home.png"         
+                BackgroundColor="Transparent"
+                
+                />
+
             </StackLayout>
 
         </Grid>

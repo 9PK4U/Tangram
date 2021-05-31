@@ -21,15 +21,17 @@ namespace Tangram.GameCore.Model.Primitives
                         return CreateRectangleFromData(data, scale);
                     case "Ellipse":
                         return CreateEllipseFromData(data, scale);
-                    case "Triengle":
+                    case "Triangle":
+                        return CreatePolygonFromData(data, scale);
+                    case "Polygon":
                         return CreatePolygonFromData(data, scale);
                     default:
-                        throw new Exception("Invalid type");
+                        throw new Exception($"\"{data.Type}\" is invalid type primitive");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("CreateFromData: " + ex.Message);
+                throw new Exception("PrimitiveCreator:CreateFromData: " + ex.Message);
             }
         }
 
@@ -68,10 +70,10 @@ namespace Tangram.GameCore.Model.Primitives
 
                 SKRect rect = SKRect.Create(new SKPoint((float)x, (float)y), new SKSize((float)w, (float)h));
 
-                System.Text.Json.JsonElement Points = (System.Text.Json.JsonElement)data.Parameters["Points"];
+                //System.Text.Json.JsonElement Points = (System.Text.Json.JsonElement)data.Parameters["Points"];
 
-                //System.Text.Json.JsonSerializer.Deserialize
-                List<Point> points = System.Text.Json.JsonSerializer.Deserialize<List<Point>>(Points.ToString());
+                List<Point> points = data.Points;
+                //List<Point> points = System.Text.Json.JsonSerializer.Deserialize<List<Point>>(Points.ToString());
                 for (int i = 0; i < points.Count; i++)
                 {
                     points[i] = new Point(points[i].X *scale, points[i].Y * scale);
@@ -98,13 +100,13 @@ namespace Tangram.GameCore.Model.Primitives
                 var y = data.Bounds.Y * scale;
 
 
-                System.Text.Json.JsonElement StartPoint = (System.Text.Json.JsonElement)data.Parameters["StartPoint"];
-                System.Text.Json.JsonElement EndPoint = (System.Text.Json.JsonElement)data.Parameters["EndPoint"];
+                //System.Text.Json.JsonElement StartPoint = (System.Text.Json.JsonElement)data.Parameters["StartPoint"];
+                //System.Text.Json.JsonElement EndPoint = (System.Text.Json.JsonElement)data.Parameters["EndPoint"];
 
-                var startX = StartPoint.GetProperty("X").GetInt32() * scale;
-                var startY = StartPoint.GetProperty("Y").GetInt32() * scale;
-                var endX = EndPoint.GetProperty("X").GetInt32() * scale;
-                var endY = EndPoint.GetProperty("Y").GetInt32() * scale;
+                var startX = data.Points[0].X * scale;
+                var startY = data.Points[0].Y * scale;
+                var endX = data.Points[1].X * scale;
+                var endY = data.Points[1].Y * scale;
 
                 SKPoint startPoint = new SKPoint((float)(data.Bounds.Right * scale - startX), (float)(data.Bounds.Bottom * scale - startY));
                 SKPoint endPoint = new SKPoint((float)(data.Bounds.Right * scale - endX), (float)(data.Bounds.Bottom * scale - endY));

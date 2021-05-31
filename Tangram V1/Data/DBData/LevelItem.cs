@@ -13,6 +13,7 @@ namespace Tangram.Data.DBData
             public int Id { get; set; }
 
             public string Name { get; set; }
+            public string Tag { get; set; }
             public string Source { get; set; }
             public bool Passed { get; set; }
             public string Complexity { get; set; }
@@ -22,6 +23,7 @@ namespace Tangram.Data.DBData
         {
             LevelItem item = new LevelItem();
             item.Name = bson["Title"].AsString;
+            item.Tag = bson["Tag"].AsString;
 
             return item;
         }

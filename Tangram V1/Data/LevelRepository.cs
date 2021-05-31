@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Tangram.Data.DBData;
 using Tangram.Data.LevelData;
 using Xamarin.Essentials;
@@ -17,9 +18,12 @@ namespace Tangram.Data
     {
         string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         DataBase db = new DataBase();
+        MongoClient client;
         public LevelRepository()
         {
-
+            MongoClientSettings settings = new MongoClientSettings();
+            settings.Server = new MongoServerAddress("176.99.11.108", 27017);
+            client = new MongoClient(settings);
         }
         public void AddLevel(LevelItem level, string lvldata)
         {
@@ -37,9 +41,7 @@ namespace Tangram.Data
 
         public void UpdateDataBase()
         {
-            MongoClientSettings settings = new MongoClientSettings();
-            settings.Server = new MongoServerAddress("176.99.11.108", 27017);
-            var client = new MongoClient(settings);
+            
             IMongoDatabase database = client.GetDatabase("GameData");
 
             IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("Maps");
@@ -50,21 +52,63 @@ namespace Tangram.Data
 
             foreach (var item in documents)
             {
-                //levels.Add(new Level() { Source = item.ToJson() });
                 if (!db.FindItem(item["Title"].AsString))
                 {
                     AddLevel(LevelItem.FromBson(item), item.ToJson());
                 }
 
             }
+
+            //МАКСУ
+            //collection.UpdateOneAsync(
+            //new BsonDocument("Update", "Levels"),
+            //new BsonDocument("$set", new BsonDocument("DataLevelUpdate", DateTime.Now.ToString())));
+
+
+            IMongoCollection<BsonDocument> collectionConf = database.GetCollection<BsonDocument>("Configurations");
+            var document = collectionConf.Find(new BsonDocument()).FirstOrDefault();
+            var dateUpdateDB = document.GetValue("DataLevelUpdate", null);
+            Preferences.Set("DATE_UPDATE_LEVEL", dateUpdateDB.ToString());
         }
         public void UpdateLevel(LevelItem item)
         {
             db.AddItem(item);
+
         }
-        public void RemoveDB()
+        public void RemoveDB() //DEBUG
         {
             db.Remove();
+        }
+        public bool CheckUpdateLevel()
+        {
+            try
+            {
+                IMongoDatabase database = client.GetDatabase("GameData");
+                IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("Configurations");
+                var document = collection.Find(new BsonDocument()).FirstOrDefault();
+                var dateUpdateDB = document.GetValue("DataLevelUpdate", null);
+                var dateUpdateClient = Preferences.Get("DATE_UPDATE_LEVEL", "EMPTY");
+                if (dateUpdateClient == "EMPTY")
+                {
+                    return true;
+                }
+                else
+                {
+                    if (dateUpdateClient == dateUpdateDB)
+                    {
+                        return false;
+                    }
+                }
+
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
         }
     }
 }

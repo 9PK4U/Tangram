@@ -6,8 +6,8 @@ using System.Diagnostics;
 using Xamarin.Forms;
 using System.IO;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 using Tangram.GameCore;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
@@ -40,33 +40,24 @@ namespace Tangram.GameCore
             var levelData = File.ReadAllText(Path.Combine(folderPath, level.Source));
             var map = Parser.Parser.FromJson(levelData);
             var sizeMap = new Size(map.Width, map.Height);
-            //sizeMap = new Size(709, 570);
 
             float _cW = (float)((float)(size.Width / sizeMap.Width) / 1.5);
-            float _cH = (float)((float)(size.Height / sizeMap.Height) / 1.5);
+            float _cH = (float)((float)(size.Height / sizeMap.Height) / 1.2);
 
             var _c = _cW < _cH ? _cW : _cH;
 
             
             sizeMap.Width *= _c;
             sizeMap.Height *= _c;
-            //DEBUG
-            //Figure _figure = new Figure(new List<Primitive>() {
-            //    new GameCore.Model.Primitives.Rectangle(0,0,(int)sizeMap.Width, (int)sizeMap.Height,1,Color.FromRgba(255,0,0,10),Color.FromRgba(255,0,0,10))},
-            //    new Point(0, 0), (int)sizeMap.Width, (int)sizeMap.Height, -1);
-            //Figures[-1] = _figure;
-            //DEBUG
 
             foreach (var item in map.FiguresData)
             {
                 Figure figure = Figure.FromData(item,_c);
-                // Figure figure = Figure.FromData(item, _cW < _cH ? _cW : _cH);
                 Figures[figure.Id] = figure;
                 SuccsessionsID[figure.ZIndex] = figure.Id;
             }
 
-            Move(new Point(-map.DrawPoint.X * _c, -map.DrawPoint.Y*_c)); // 709 570
-
+            Move(new Point(-map.DrawPoint.X * _c, -map.DrawPoint.Y*_c));
             Move(new Point(size.Width / 2 - sizeMap.Width / 2, size.Height / 2 - sizeMap.Height / 2));
 
 
@@ -76,9 +67,6 @@ namespace Tangram.GameCore
         {
             foreach (var item in Figures)
             {
-                //DEBUG
-                //if (item.Key == -1) continue;
-                //DEBUG
                 item.Value.Move(new Point (item.Value.DrawPoint.X + dpoint.X, item.Value.DrawPoint.Y + dpoint.Y));
             }
         }

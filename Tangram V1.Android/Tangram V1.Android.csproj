@@ -80,6 +80,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,7 +104,9 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Technic.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangram V1\Tangram V1.csproj">
       <Project>{DBFCD128-BAC9-4CE3-A0C0-1D7BF1BE629C}</Project>
@@ -127,6 +130,29 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Anime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Animals.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Standart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Tangram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ChangeCategory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ChanceMode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\backmusic.mp3">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
